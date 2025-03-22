@@ -31,7 +31,7 @@
             if (kwota <= 0)
                 throw new ArgumentException("Kwota wypłaty musi być dodatnia.");
             if (kwota > bilans)
-                throw new ArgumentException("Brak wystarczających środków na koncie, do wypłaty.");
+                throw new InvalidOperationException("Brak wystarczających środków na koncie, do wypłaty.");
             if (zablokowane)
                 throw new InvalidOperationException("Konto jest zablokowane.");
             bilans -= kwota;
