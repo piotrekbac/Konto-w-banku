@@ -1,21 +1,22 @@
-ï»¿using System;
-using Bank; 
+using System;
+using System.Security.Cryptography.X509Certificates;
+using Bank;
 using Microsoft.VisualStudio.TestTools.UnitTesting; //dodanie biblioteki do testowania
 
 namespace TestyBanku
 {
     [TestClass]
-    public class TestKonto
+    public class TestyKontoPlus
     {
         [TestMethod]
         public void TestWplata()
         {
             //Arrange
-            var konto = new Konto ("Piotr Bacior", 1000);
-
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
+            
             //Act
             konto.Wplata(500);
-
+            
             //Assert
             Assert.AreEqual(1500, konto.Bilans);
         }
@@ -24,51 +25,50 @@ namespace TestyBanku
         [ExpectedException(typeof(ArgumentException))]
         public void TestWplataZero()
         {
-            //Arrange 
-            var konto = new Konto("Piotr Bacior", 1000);
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.Wplata(0);
 
-            //Assert 
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z wplaty 0
+            //Assert
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty 0
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestWplataUjemnaKwota()
+        public void TestWplataUjemna()
         {
-            //Arrange 
-            var konto = new Konto("Piotr Bacior", 1000);
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.Wplata(-500);
 
             //Assert
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z wplaty ujemnej kwoty
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty ujemnej kwoty
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-
         public void TestWplataKontoZablokowane()
         {
             //Arrange
-            var konto = new Konto("Piotr Bacior", 1000);
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.BlokujKonto();
             konto.Wplata(500);
 
             //Assert
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z wplaty na zablokowane konto
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty na zablokowane konto
         }
 
         [TestMethod]
         public void TestWyplata()
         {
-            //Arrange 
-            var konto = new Konto("Piotr Bacior", 1000);
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.Wyplata(500);
@@ -82,69 +82,72 @@ namespace TestyBanku
         public void TestWyplataZero()
         {
             //Arrange
-            var konto = new Konto("Piotr Bacior", 1000);
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
-            //Act 
+            //Act
             konto.Wyplata(0);
 
             //Assert
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z wplaty 0
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty 0
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestWyplataUjemnaKwota()
+        public void TestWyplataUjemna()
         {
-            //Arrange 
-            var konto = new Konto("Piotr Bacior", 1000);
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.Wyplata(-500);
 
             //Assert
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z wplaty ujemnej kwoty
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty ujemnej kwoty
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void TestWyplataKontoZablokowane()
+        public void TestWyplataZablokowaneKonto()
         {
-            //Arrange 
-            var konto = new Konto("Piotr Bacior", 1000);
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.BlokujKonto();
             konto.Wyplata(500);
 
-            //Assert    
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z wplaty na zablokowane konto
+            //Assert
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty na zablokowane konto
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException (typeof(InvalidOperationException))]
         public void TestWyplataNiewystarczajaceSrodki()
         {
             //Arrange
-            var konto = new Konto("Piotr Bacior", 1000);
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
             konto.Wyplata(1500);
 
             //Assert
-            //ExpectedException sprawdza czy wyrzucany jest wyjÄ…tek wynikajÄ…cy z prÃ³by wypÅ‚aty zbyt duÅ¼ej iloÅ›ci Å›rodkÃ³w (niewystarczajÄ…ce Å›rodki)
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z próby wyp³aty zbyt du¿ej iloœci œrodków (niewystarczaj¹ce œrodki)
+
         }
 
         [TestMethod]
         public void TestBlokujOdblokujKonto()
         {
             //Arrange
-            var konto = new Konto("Piotr Bacior", 1000);
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
-            //Act oraz Assert
+            //Act i Assert
             konto.BlokujKonto();
             Assert.IsTrue(konto.Zablokowane);
             konto.OdblokujKonto();
             Assert.IsFalse(konto.Zablokowane);
         }
+
     }
+
 }

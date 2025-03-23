@@ -32,8 +32,8 @@ namespace Bank
             get
             {
                 if (debetWykorzystany)
-                    return base.Bilans;
-                return base.Bilans + jednorazowyLimitDebetowy;
+                    return base.Bilans + jednorazowyLimitDebetowy;
+                return base.Bilans;
             }
         }
 
@@ -59,7 +59,7 @@ namespace Bank
         {
             base.Wplata(kwota);
 
-            if (base.Bilans >= 0)
+            if (base.Bilans > 0)
             {
                 debetWykorzystany = false;
                 OdblokujKonto();
