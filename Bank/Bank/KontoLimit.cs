@@ -24,8 +24,8 @@ namespace Bank
             get
             {
                 if (debetWykorzystany)
-                    return konto.Bilans;
-                return konto.Bilans + jednorazowyLimitDebetowy;
+                    return konto.Bilans + jednorazowyLimitDebetowy;
+                return konto.Bilans;
             }
         }
 
@@ -62,7 +62,7 @@ namespace Bank
         public void Wplata(decimal kwota)
         {
             konto.Wplata(kwota);
-            if (konto.Bilans > 0)
+            if (konto.Bilans >= 0)
             {
                 debetWykorzystany = false;
                 konto.OdblokujKonto();
