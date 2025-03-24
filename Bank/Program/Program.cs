@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 namespace Bank
 {
     class Program
+        //Piotr Bacior - 15 722 - 1 rok Informatyka stosowana - WSEI 
     {
         static void Main(string[] args)
         {
@@ -149,7 +150,28 @@ namespace Bank
             }
 
             Console.WriteLine("--------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Teraz zaprezentuję rozwiązanie kroku 5: ");
+            Console.WriteLine();
 
+            //Konwersja konta na kontoPlus
+            Konto Bacior = new Konto("Bacior", 1000);
+            Console.WriteLine($"Utworzono konto dla użytkownika: {Bacior.Nazwa} o bilansie: {Bacior.Bilans}");
+            KontoPlus BaciorPlus = Bacior.KonwertujNaKontoPlus(2000);
+            Console.WriteLine($"Konto zamienione na KontoPlus dla użytkownika Bacior o bilansie: {BaciorPlus.Bilans} i limicie debetowym: {BaciorPlus.JednorazowyLimitDebetowy}");
+
+            //Konwersja kontaPlus do Konto (konta zwykłego) 
+            Konto BaciorZwykle = BaciorPlus.KonwertujNaKonto();
+            Console.WriteLine($"KontoPlus zmienione na konto zwykłe dla użytkownika Bacior o bilansie: {BaciorZwykle.Bilans}");
+
+            //Konwersja ze zwykłego konta do KontoLimit
+            KontoLimit BaciorLimit = BaciorZwykle.KonwertujNaKontoLimit(1500);
+            Console.WriteLine($"Konto zmienione na KontoLimit dla użytkownika Bacior o bilansie: {BaciorLimit.Bilans} oraz limicie debetowym: {BaciorLimit.JednorazowyLimitDebetowy}");
+
+            //Kownersja KontoLimit na Konto (konto zwykłe)
+            Konto BaciorZwykle2 = BaciorLimit.KonwertujNaKonto();
+            Console.WriteLine($"KontoLimit zamienione na zwykłe Konto dla użytkownika Bacior o bilansie: {BaciorZwykle2.Bilans}");
+
+            Console.WriteLine("--------------------------------------------------------------------------------------------------");
         }
     }
 }

@@ -64,7 +64,11 @@ namespace Bank
                 debetWykorzystany = false;
                 OdblokujKonto();
             }
+        }
 
+        public Konto KonwertujNaKonto()
+        {
+            return new Konto(Nazwa, Bilans);
         }
 
     }

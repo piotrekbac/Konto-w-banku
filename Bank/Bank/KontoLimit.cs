@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank
+namespace Bank 
 {
-    public class KontoLimit
+    public class KontoLimit : IKonto
     {
         private Konto konto;
         private decimal jednorazowyLimitDebetowy;
@@ -79,5 +79,11 @@ namespace Bank
         {
             konto.OdblokujKonto();
         }
+
+        public Konto KonwertujNaKonto()
+        {
+            return new Konto(Nazwa, Bilans);
+        }
+
     }
 }

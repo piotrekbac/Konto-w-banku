@@ -1,6 +1,6 @@
 ﻿namespace Bank
 {
-    public class Konto
+    public class Konto : IKonto
     {
         private string klient;                      //nazwa klienta
         private decimal bilans;                     //aktualny stan środków na koncie 
@@ -47,6 +47,15 @@
             zablokowane = false;   
         }
 
+        public KontoPlus KonwertujNaKontoPlus(decimal limitDebetowy)
+        {
+            return new KontoPlus(klient, bilans, limitDebetowy);
+        }
+
+        public KontoLimit KonwertujNaKontoLimit(decimal limitDebetowy)
+        {
+            return new KontoLimit(klient,bilans, limitDebetowy);
+        }
 
     }
 
