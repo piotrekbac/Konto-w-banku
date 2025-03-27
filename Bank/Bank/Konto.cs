@@ -43,21 +43,25 @@
             bilans -= kwota;
         }
 
+        //Metoda do blokowania konta
         public void BlokujKonto()
         {
             zablokowane = true;
         }
 
+        //Metoda do odblokowania konta
         public void OdblokujKonto()
         {
             zablokowane = false;   
         }
 
+        //Metoda konwertująca konto na kontoPlus
         public KontoPlus KonwertujNaKontoPlus(decimal limitDebetowy)
         {
             return new KontoPlus(klient, bilans, limitDebetowy);
         }
 
+        //Metoda konwertująca konto na kontoLimit
         public KontoLimit KonwertujNaKontoLimit(decimal limitDebetowy)
         {
             return new KontoLimit(klient,bilans, limitDebetowy);

@@ -8,21 +8,24 @@ namespace Bank
 {
     public class KontoLimit : IKonto
     {
-        private Konto konto;
-        private decimal jednorazowyLimitDebetowy;
-        private bool debetWykorzystany = false;
+        private Konto konto;                        //prywatny obiekt klasy Konto
+        private decimal jednorazowyLimitDebetowy;   //prywatna zmienna jednorazowyLimitDebetowy
+        private bool debetWykorzystany = false;     //prywatna zmienna debetWykorzystany
 
+        //Konstruktor, który inicjuje obiekt klasy Konto oraz jednorazowyLimitDebetowy
         public KontoLimit(string klient, decimal bilansNaStart, decimal jednorazowyLimitDebetowy)
         {
             konto = new Konto(klient, bilansNaStart);
             this.jednorazowyLimitDebetowy = jednorazowyLimitDebetowy;
         }
 
+        //Właściwości tylko do odczytu (ReadOnly), które zwracają nazwę klienta, bilans oraz stan zablokowania konta
         public string Nazwa => konto.Nazwa;
         public decimal Bilans
         {
             get
             {
+                //Jeżeli debetWykorzystany to zwracany jest bilans konta plus jednorazowyLimitDebetowy, w przeciwnym wypadku zwracany jest bilans konta
                 if (debetWykorzystany)
                     return konto.Bilans + jednorazowyLimitDebetowy;
                 return konto.Bilans;
