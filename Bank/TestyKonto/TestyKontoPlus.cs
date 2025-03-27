@@ -148,6 +148,42 @@ namespace TestyBanku
             Assert.IsFalse(konto.Zablokowane);
         }
 
-    }
+        [TestMethod]
+        public void TestJednorazowyLimitDebetowy()
+        {
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
+            //Act
+            konto.JednorazowyLimitDebetowy = 600;
+
+            //Assert
+            Assert.AreEqual(600, konto.JednorazowyLimitDebetowy);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestJednorazowyLimitDebetowyUjemny()
+        {
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
+            //Act
+            konto.JednorazowyLimitDebetowy = -500;
+            //Assert
+            //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z próby ustawienia ujemnego limitu debetowego
+        }
+
+        [TestMethod]
+        public void TestKonwertujNaKonto()
+        {
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
+
+            //Act
+            Konto konto2 = konto.KonwertujNaKonto();
+
+            //Assert
+            Assert.AreEqual(1000, konto2.Bilans);
+        }
+    }
 }

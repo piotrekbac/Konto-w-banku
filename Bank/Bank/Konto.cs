@@ -5,7 +5,7 @@
     {
         private string klient;                      //nazwa klienta
         private decimal bilans;                     //aktualny stan środków na koncie 
-        private bool zablokowane = false;           //stan konta 
+        private bool zablokowane = false;           //stan konta (czy jest zablokowane)
 
         //private void UtworzKonto() { }            //metoda tworząca konto w podkroku 3 kroku 1 z treści - niepotrzebna
 
@@ -58,7 +58,7 @@
         //Metoda konwertująca konto na kontoPlus
         public KontoPlus KonwertujNaKontoPlus(decimal limitDebetowy)
         {
-            return new KontoPlus(klient, bilans, limitDebetowy);
+            return new KontoPlus(klient, bilans, limitDebetowy);   
         }
 
         //Metoda konwertująca konto na kontoLimit

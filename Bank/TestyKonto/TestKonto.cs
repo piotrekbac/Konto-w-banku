@@ -146,5 +146,36 @@ namespace TestyBanku
             konto.OdblokujKonto();
             Assert.IsFalse(konto.Zablokowane);
         }
+
+        [TestMethod]
+        public void TestKonwertujNaKontoLimit()
+        {
+            //Arrange
+            var konto = new Konto("Piotr Bacior", 1000);
+
+            //Act
+            var kontoPlus = konto.KonwertujNaKontoLimit(500);
+
+            //Assert
+            Assert.AreEqual("Piotr Bacior", kontoPlus.Nazwa);
+            Assert.AreEqual(1000, kontoPlus.Bilans);
+            Assert.AreEqual(500, kontoPlus.JednorazowyLimitDebetowy);
+        }
+
+
+        [TestMethod]
+        public void TestKonwertujNaKontoPlus()
+        {
+            //Arrange
+            var konto = new Konto("Piotr Bacior", 1000);
+
+            //Act
+            var kontoPlus = konto.KonwertujNaKontoPlus(500);
+
+            //Assert
+            Assert.AreEqual("Piotr Bacior", kontoPlus.Nazwa);
+            Assert.AreEqual(1000, kontoPlus.Bilans);
+            Assert.AreEqual(500, kontoPlus.JednorazowyLimitDebetowy);
+        }
     }
 }
