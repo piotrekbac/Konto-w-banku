@@ -8,6 +8,7 @@ namespace TestyBanku
     [TestClass]
     public class TestyKontoPlus
     {
+        //Test sprawdzaj¹cy czy metoda Wplata zwiêksza bilans konta
         [TestMethod]
         public void TestWplata()
         {
@@ -21,6 +22,7 @@ namespace TestyBanku
             Assert.AreEqual(1500, konto.Bilans);
         }
 
+        //Test sprawdzaj¹cy czy metoda Wplata wyrzuca wyj¹tek gdy kwota jest równa 0
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWplataZero()
@@ -35,6 +37,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty 0
         }
 
+        //Test sprawdzaj¹cy czy metoda Wplata wyrzuca wyj¹tek, gdy kwota jest ujemna
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWplataUjemna()
@@ -49,6 +52,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty ujemnej kwoty
         }
 
+        //Test sprawdzaj¹cy czy metoda Wplata wyrzuca wyj¹tek, gdy konto jest zablokowane
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestWplataKontoZablokowane()
@@ -64,6 +68,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty na zablokowane konto
         }
 
+        //Test sprawdzaj¹cy czy metoda Wyplata zmniejsza bilans konta
         [TestMethod]
         public void TestWyplata()
         {
@@ -77,6 +82,7 @@ namespace TestyBanku
             Assert.AreEqual(500, konto.Bilans);
         }
 
+        //Test sprawdzaj¹cy czy metoda Wyplata wyrzuca wyj¹tek, gdy kwota jest równa 0
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWyplataZero()
@@ -91,6 +97,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty 0
         }
 
+        //Test sprawdzaj¹cy czy metoda Wyplata wyrzuca wyj¹tek, gdy kwota jest ujemna
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWyplataUjemna()
@@ -105,6 +112,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty ujemnej kwoty
         }
 
+        //Test sprawdzaj¹cy czy metoda Wyplata wyrzuca wyj¹tek, gdy konto jest zablokowane
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestWyplataZablokowaneKonto()
@@ -120,6 +128,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z wplaty na zablokowane konto
         }
 
+        //Test sprawdzaj¹cy czy metoda Wyplata wyrzuca wyj¹tek, gdy brakuje œrodków na koncie
         [TestMethod]
         [ExpectedException (typeof(InvalidOperationException))]
         public void TestWyplataNiewystarczajaceSrodki()
@@ -135,6 +144,7 @@ namespace TestyBanku
 
         }
 
+        //Test sprawdzaj¹cy czy metoda BlokujKonto blokuje konto oraz czy metoda OdblokujKonto odblokowuje konto
         [TestMethod]
         public void TestBlokujOdblokujKonto()
         {
@@ -148,6 +158,7 @@ namespace TestyBanku
             Assert.IsFalse(konto.Zablokowane);
         }
 
+        //Test sprawdzaj¹cy czy metoda JednorazowyLimitDebetowy ustawia limit debetowy
         [TestMethod]
         public void TestJednorazowyLimitDebetowy()
         {
@@ -161,6 +172,7 @@ namespace TestyBanku
             Assert.AreEqual(600, konto.JednorazowyLimitDebetowy);
         }
 
+        //Test sprawdzaj¹cy czy metoda JednorazowyLimitDebetowyUjemny wyrzuca wyj¹tek, gdy próbujemy ustawiæ ujemny limit debetowy
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestJednorazowyLimitDebetowyUjemny()
@@ -173,6 +185,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z próby ustawienia ujemnego limitu debetowego
         }
 
+        //Test sprawdzaj¹cy czy metoda KonwertujNaKonto zwraca poprawne dane
         [TestMethod]
         public void TestKonwertujNaKonto()
         {

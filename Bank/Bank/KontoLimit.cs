@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank 
+namespace Bank
 {
     public class KontoLimit : IKonto
     {
@@ -19,7 +19,7 @@ namespace Bank
             this.jednorazowyLimitDebetowy = jednorazowyLimitDebetowy;
         }
 
-        //Właściwość tylko do odczytu (ReadOnly), która zwracaja nazwę klienta
+        //Właściwość tylko do odczytu (ReadOnly), która zwraca nazwę klienta
         public string Nazwa => konto.Nazwa;
 
         //Właściwość publiczna, która zwraca bilans konta
@@ -27,8 +27,8 @@ namespace Bank
         {
             get
             {
-                //Jeżeli debetWykorzystany to zwracany jest bilans konta plus jednorazowyLimitDebetowy, w przeciwnym wypadku zwracany jest bilans konta
-                if (debetWykorzystany)
+                //Jeżeli bilans konta jest ujemny to zwracany jest bilans konta plus jednorazowyLimitDebetowy, w przeciwnym wypadku zwracany jest bilans konta
+                if (konto.Bilans < 0)
                     return konto.Bilans + jednorazowyLimitDebetowy;
                 return konto.Bilans;
             }
@@ -40,7 +40,6 @@ namespace Bank
         //Właściwość publiczna, która zwraca jednorazowyLimitDebetowy oraz pozwala na jego zmianę
         public decimal JednorazowyLimitDebetowy
         {
-            
             get => jednorazowyLimitDebetowy;
             set
             {
@@ -52,6 +51,7 @@ namespace Bank
             }
         }
 
+
         //Metoda do wypłacania środków z konta
         public void Wyplata(decimal kwota)
         {
@@ -59,11 +59,11 @@ namespace Bank
                 throw new InvalidOperationException("Konto jest zablokowane.");     //Wyrzucenie wyjątku InvalidOperationException, gdy konto jest zablokowane
             if (kwota <= 0)                                                         //Jeżeli kwota jest mniejsza lub równa zero to wyrzucany jest wyjątek:
                 throw new ArgumentException("Kwota musi być większa od zera.");     //Wyrzucenie wyjątku ArgumentException, gdy kwota jest mniejsza lub równa zero
-            if (kwota > Bilans)                                                     //Jeżeli kwota jest większa od bilansu konta to wyrzucany jest wyjątek:
+            if (kwota > Bilans)                    //Jeżeli kwota jest większa od bilansu konta plus limit debetowy to wyrzucany jest wyjątek:
                 throw new InvalidOperationException
-                    ("Niewystarczające środki na koncie, uwzględniając limit debetowy");      //Wyrzucenie wyjątku InvalidOperationException, gdy występuje brak wystarczających środków na koncie
+                    ("Niewystarczające środki na koncie, uwzględniając limit debetowy");     //Wyrzucenie wyjątku InvalidOperationException, gdy występuje brak wystarczających środków na koncie z uwzględnieniem limitu debetowego
 
-            //wypłąta kwoty z konta 
+            //wypłata kwoty z konta 
             konto.Wyplata(kwota);
 
             //Jeżeli bilans konta jest mniejszy od zera to debetWykorzystany jest ustawiany na true oraz konto jest blokowane
@@ -104,6 +104,5 @@ namespace Bank
         {
             return new Konto(Nazwa, Bilans);
         }
-
     }
 }
