@@ -200,7 +200,7 @@ namespace TestyBanku
 
             //Assert
             Assert.IsNotNull(konto);
-            Assert.AreEqual("Piotr Bacior", konto.Nazwa);         
+            Assert.AreEqual("Piotr Bacior", konto.Nazwa);
         }
 
         //Test sprawdzaj¹cy czy metoda BilansZDebetem zwraca poprawne dane
@@ -212,10 +212,9 @@ namespace TestyBanku
 
             // Act - pobranie bilansu
             var bilans = konto.Bilans + konto.JednorazowyLimitDebetowy;
-            
 
             // Assert - sprawdzenie wyników
-            Assert.AreEqual(1500, bilans); 
+            Assert.AreEqual(1500, bilans);
         }
 
         //Test sprawdzaj¹cy czy metoda BilansBezDebetu zwraca poprawne dane
@@ -230,7 +229,6 @@ namespace TestyBanku
 
             //Assert
             Assert.AreEqual(1000, bilans);
-        }
+        } 
     }
-
 }

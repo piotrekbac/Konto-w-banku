@@ -14,10 +14,10 @@ namespace TestyBanku
         {
             //Arrange
             var konto = new KontoPlus("Piotr Bacior", 1000, 500);
-            
+
             //Act
             konto.Wplata(500);
-            
+
             //Assert
             Assert.AreEqual(1500, konto.Bilans);
         }
@@ -130,14 +130,14 @@ namespace TestyBanku
 
         //Test sprawdzaj¹cy czy metoda Wyplata wyrzuca wyj¹tek, gdy brakuje œrodków na koncie
         [TestMethod]
-        [ExpectedException (typeof(InvalidOperationException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void TestWyplataNiewystarczajaceSrodki()
         {
             //Arrange
             var konto = new KontoPlus("Piotr Bacior", 1000, 500);
 
             //Act
-            konto.Wyplata(1500);
+            konto.Wyplata(1501);
 
             //Assert
             //ExpectedException sprawdza czy wyrzucany jest wyj¹tek wynikaj¹cy z próby wyp³aty zbyt du¿ej iloœci œrodków (niewystarczaj¹ce œrodki)
@@ -197,6 +197,21 @@ namespace TestyBanku
 
             //Assert
             Assert.AreEqual(1000, konto2.Bilans);
+        }
+
+        //Test sprawdzaj¹cy, czy flaga debetWykorzystany jest ustawiana na true oraz czy konto jest blokowane, gdy bilans jest mniejszy od zera
+        [TestMethod]
+        public void TestDebetWykorzystany()
+        {
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
+
+            //Act
+            konto.Wyplata(1200);
+
+            //Assert
+            Assert.IsTrue(konto.Zablokowane);
+            Assert.AreEqual(300, konto.Bilans);
         }
     }
 }

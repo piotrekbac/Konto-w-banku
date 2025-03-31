@@ -1,5 +1,5 @@
 ﻿using System;
-using Bank; 
+using Bank;
 using Microsoft.VisualStudio.TestTools.UnitTesting; //dodanie biblioteki do testowania
 
 namespace TestyBanku
@@ -11,7 +11,7 @@ namespace TestyBanku
         public void TestWplata()
         {
             //Arrange
-            var konto = new Konto ("Piotr Bacior", 1000);
+            var konto = new Konto("Piotr Bacior", 1000);
 
             //Act
             konto.Wplata(500);

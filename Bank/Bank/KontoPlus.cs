@@ -49,7 +49,7 @@ namespace Bank
                 throw new InvalidOperationException("Konto jest zablokowane.");                             //Wyrzucenie wyjątku InvalidOperationException, gdy konto jest zablokowane
             if (kwota <= 0)                                                                                 //Jeżeli kwota jest mniejsza lub równa zero to wyrzucany jest wyjątek:
                 throw new ArgumentException("Kwota wypłaty musi być dodatnia.");                            //Wyrzucenie wyjątku ArgumentException, gdy kwota jest mniejsza lub równa zero
-            if (kwota > Bilans)                                                                             //Jeżeli kwota jest większa od bilansu to wyrzucany jest wyjątek:
+            if (kwota > (Bilans + jednorazowyLimitDebetowy))                                                                             //Jeżeli kwota jest większa od bilansu to wyrzucany jest wyjątek:
                 throw new InvalidOperationException("Brak wystarczających środków na koncie, do wypłaty."); //Wyrzucenie wyjątku InvalidOperationException, gdy występuje brak wystarczających środków na koncie
 
             base.Wyplata(kwota);
