@@ -34,7 +34,7 @@
         //Metoda do wypłacania środków z konta
         public void Wyplata(decimal kwota)
         {
-            if(this is KontoPlus)
+            if (this is KontoPlus)
             {
                 bilans -= kwota;
                 return;

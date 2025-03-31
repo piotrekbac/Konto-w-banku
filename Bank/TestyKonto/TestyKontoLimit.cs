@@ -229,6 +229,21 @@ namespace TestyBanku
 
             //Assert
             Assert.AreEqual(1000, bilans);
-        } 
+        }
+
+        //Test sprawdzaj¹cy czy metoda DebetWykorzystany zwraca poprawne dane
+        [TestMethod]
+        public void TestDebetWykorzystany()
+        {
+            //Arrange
+            var konto = new KontoPlus("Piotr Bacior", 1000, 500);
+
+            //Act
+            konto.Wyplata(1200);
+
+            //Assert
+            Assert.IsTrue(konto.Zablokowane);
+            Assert.AreEqual(300, konto.Bilans);
+        }
     }
 }

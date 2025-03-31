@@ -7,6 +7,7 @@ namespace TestyBanku
     [TestClass]
     public class TestKonto
     {
+        //Test sprawdzający czy metoda Wplata zwiększa bilans konta
         [TestMethod]
         public void TestWplata()
         {
@@ -20,6 +21,7 @@ namespace TestyBanku
             Assert.AreEqual(1500, konto.Bilans);
         }
 
+        //Test sprawdzający czy metoda Wplata wyrzuca wyjątek gdy kwota jest równa 0
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWplataZero()
@@ -34,6 +36,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyjątek wynikający z wplaty 0
         }
 
+        //Test sprawdzający czy metoda Wplata wyrzuca wyjątek, gdy kwota jest ujemna
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWplataUjemnaKwota()
@@ -51,6 +54,7 @@ namespace TestyBanku
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
 
+        //Test sprawdzający czy metoda Wplata wyrzuca wyjątek gdy konto jest zablokowane
         public void TestWplataKontoZablokowane()
         {
             //Arrange
@@ -64,6 +68,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyjątek wynikający z wplaty na zablokowane konto
         }
 
+        //Test sprawdzający czy metoda Wyplata zmniejsza bilans konta
         [TestMethod]
         public void TestWyplata()
         {
@@ -77,6 +82,7 @@ namespace TestyBanku
             Assert.AreEqual(500, konto.Bilans);
         }
 
+        //Test sprawdzający czy metoda Wyplata wyrzuca wyjątek gdy kwota jest równa 0
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWyplataZero()
@@ -91,6 +97,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyjątek wynikający z wplaty 0
         }
 
+        //Test sprawdzający czy metoda Wyplata wyrzuca wyjątek, gdy kwota jest ujemna
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestWyplataUjemnaKwota()
@@ -105,6 +112,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyjątek wynikający z wplaty ujemnej kwoty
         }
 
+        //Test sprawdzający czy metoda Wyplata wyrzuca wyjątek, gdy konto jest zablokowane
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestWyplataKontoZablokowane()
@@ -120,6 +128,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyjątek wynikający z wplaty na zablokowane konto
         }
 
+        //Test sprawdzający czy metoda Wyplata wyrzuca wyjątek, gdy próbujemy wypłacić zbyt dużą kwotę
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestWyplataNiewystarczajaceSrodki()
@@ -134,6 +143,7 @@ namespace TestyBanku
             //ExpectedException sprawdza czy wyrzucany jest wyjątek wynikający z próby wypłaty zbyt dużej ilości środków (niewystarczające środki)
         }
 
+        //Test sprawdzający czy metoda BlokujKonto oraz OdblokujKonto działają poprawnie
         [TestMethod]
         public void TestBlokujOdblokujKonto()
         {
@@ -147,6 +157,7 @@ namespace TestyBanku
             Assert.IsFalse(konto.Zablokowane);
         }
 
+        //Test sprawdzający czy metoda KonwertujNaKontoPlus zwraca obiekt klasy KontoPlus
         [TestMethod]
         public void TestKonwertujNaKontoLimit()
         {
@@ -162,7 +173,7 @@ namespace TestyBanku
             Assert.AreEqual(500, kontoPlus.JednorazowyLimitDebetowy);
         }
 
-
+        //Test sprawdzający czy metoda KonwertujNaKontoPlus zwraca poprawne dane
         [TestMethod]
         public void TestKonwertujNaKontoPlus()
         {
